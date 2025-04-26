@@ -10,7 +10,7 @@ service AudioStreamer {
     rpc GetAudioMetaData (AudioFileRequest) returns (AudioMetaData){}
 
     // Transmit audio file in chunks
-    rpc StreamAudio (AudioFileReqquest) returns (stream AudioChunk){}
+    rpc StreamAudio (AudioFileRequest) returns (stream AudioChunk){}
 
 }
 
@@ -34,7 +34,7 @@ message AudioFile {
 }
 
 // Metadata of an audio file
-message AudioMetadata {
+message AudioMetaData {
     string filename = 1;
     int32 sample_rate = 2; // Sample rate in Hz
     int32 channels = 3; // Number of channels (e.g., mono, stereo)
