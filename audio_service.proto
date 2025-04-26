@@ -1,0 +1,52 @@
+syntax = "proto3";
+
+package audio_streaming;
+
+service AudioStreamer {
+    // List all audio files
+    rpc ListAudioFiles(Empty) returns (AudioFileList){}
+
+    // Get metadata of a specific audio file
+    rpc GetAudioMetaData (AudioFileRequest) returns (AudioMetaData){}
+
+    // Transmit audio file in chunks
+    rpc StreamAudio (AudioFileReqquest) returns (stream AudioChunk){}
+
+}
+
+// Message empty for requests with no parameters
+message Empty {}
+
+// Request audio file
+message AudioFileRequest {
+    string file_name = 1; // Name of the audio file
+}
+
+// List of audio files
+message AudioFileList {
+    repeated AudioFile files = 1;
+}
+
+// Information about a specific audio file
+message AudioFile {
+    string filename = 1;
+    string title = 2;
+}
+
+// Metadata of an audio file
+message AudioMetadata {
+    string filename = 1;
+    int32 sample_rate = 2; // Sample rate in Hz
+    int32 channels = 3; // Number of channels (e.g., mono, stereo)
+    int32 duration_seconds = 4; // Duration in seconds
+    string format = 5; // Audio format (e.g., mp3, wav)
+    int32 bit_depth = 6; // Bit depth (e.g., 16, 24)
+}
+
+// Chunk of audio data
+message AudioChunk {
+    bytes audio_data = 1;
+    int32 sample_rate = 2; // Sample rate in Hz
+    int32 channels = 3; // Number of channels (e.g., mono, stereo)
+    int32 position_ms = 4; // Position in milliseconds
+}
