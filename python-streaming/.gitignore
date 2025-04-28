@@ -1,0 +1,8 @@
+audio_service_pb2.py
+audio_service_pb2_grpc.py
+downloader.py
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.vscode
